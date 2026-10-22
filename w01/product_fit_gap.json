@@ -1,0 +1,130 @@
+{
+  "contract_version": "w01-0.2.1",
+  "product_version": "0.2.0-w1",
+  "capability_matrix_version": "w1-capabilities-0.2.0",
+  "items": [
+    {
+      "id": "GAP-001",
+      "request": "在客户自己的会员订单上，比较两个时期的老会员净消费，找出下降人群并给出依据。它对应沈总「识别哪些人需要重点经营」。",
+      "category": "系统适配",
+      "capability_ids": [
+        "CAP-003",
+        "CAP-004",
+        "CAP-006"
+      ],
+      "evidence_status": "reported",
+      "evidence": [
+        {
+          "source": "01_沈总立项邮件.md",
+          "locator": "MAIL-W01-001 正文第 3 段",
+          "note": "沈总要求从 80 万活跃会员里识别重点经营对象。80万和会员老化是他的说法。"
+        },
+        {
+          "source": "product/capabilities.json",
+          "locator": "CAP-003、CAP-004、CAP-006",
+          "note": "样例可按标准定义比较净消费，并区分零与未知。青禾语义不自动支持。"
+        },
+        {
+          "source": "artifacts/w01/promptfoo-results.json",
+          "locator": "eval-Jiq-2026-10-22T06:55:40 第 1 条",
+          "note": "本机 live 得到样例下降会员 M001、M004、M007。只覆盖松果生活样例。"
+        }
+      ],
+      "next_step": "向老周要允许使用的脱敏订单样本和字段说明，核对净消费、老会员、退款、门店覆盖是否与标准定义一致。对不上时，把本条改成产品缺口或客户配置。"
+    },
+    {
+      "id": "GAP-002",
+      "request": "核验沈总所说的复购连续四个季度下滑，以及「会员老化」是否等于频次或消费额下降，并据此取事实基线。",
+      "category": "待判断",
+      "capability_ids": [
+        "CAP-006"
+      ],
+      "evidence_status": "reported",
+      "evidence": [
+        {
+          "source": "01_沈总立项邮件.md",
+          "locator": "MAIL-W01-001 文首及第 2–3 段",
+          "note": "连续四个季度下滑、会员老化、三个月见效，都是发起人判断，邮件写明不等于已核实结论。"
+        },
+        {
+          "source": "product/API.md",
+          "locator": "样例数据定义段",
+          "note": "产品只定义样例净消费、老会员和下降至少 20%。不把样例 SQL 结果当作青禾指标。"
+        }
+      ],
+      "next_step": "请沈总指出复购率、活跃会员、会员老化的现用定义和看板位置。定义落到字段之前，不把样例「下降至少 20%」写成青禾口径。"
+    },
+    {
+      "id": "GAP-003",
+      "request": "识别之后直接给小林运营建议，不再让她另整理一套表。",
+      "category": "待判断",
+      "capability_ids": [
+        "CAP-003"
+      ],
+      "evidence_status": "reported",
+      "evidence": [
+        {
+          "source": "01_沈总立项邮件.md",
+          "locator": "MAIL-W01-001 第 3 段第 3 点",
+          "note": "沈总希望识别后直接给小林建议。小林本人尚未受访。"
+        },
+        {
+          "source": "02_公司与项目协作关系.md",
+          "locator": "BRIEF-W01-001 角色表",
+          "note": "W1 只开放沈总。小林的日常动作仍未知。"
+        },
+        {
+          "source": "artifacts/w01/promptfoo-results.json",
+          "locator": "eval-Jiq-2026-10-22T06:55:40 第 1 条",
+          "note": "样例上会给出召回建议。青禾运营是否接受这个颗粒度尚未核实。"
+        }
+      ],
+      "next_step": "W01 只能约沈总。下一轮约小林，用她现在的名单字段对照样例建议，确认这个颗粒度能否进日常操作。"
+    },
+    {
+      "id": "GAP-004",
+      "request": "接入青禾订单，处理退款、零消费和未覆盖门店，不能把样例规则直接套上去。",
+      "category": "系统适配",
+      "capability_ids": [
+        "CAP-004",
+        "CAP-006"
+      ],
+      "evidence_status": "unknown",
+      "evidence": [
+        {
+          "source": "product/API.md",
+          "locator": "样例覆盖与青禾数据段",
+          "note": "S03 的 8 月标未知。青禾原始数据要另做清洗、映射，导入另一实例。"
+        },
+        {
+          "source": "02_公司与项目协作关系.md",
+          "locator": "BRIEF-W01-001 第 3 段",
+          "note": "产品尚未接入青禾数据，本周没有完整会员明细和指标定义。"
+        }
+      ],
+      "next_step": "请老周确认青禾有没有门店覆盖缺口，并给出退款、取消、零消费字段。样例 S03 的未知只说明样例，不能写成青禾已经缺数。"
+    },
+    {
+      "id": "GAP-005",
+      "request": "本期不承诺自动发券、发消息或三个月复购效果。沈总邮件没有提出自动触达，只提出了时间预期。",
+      "category": "暂不承诺",
+      "capability_ids": [
+        "CAP-007"
+      ],
+      "evidence_status": "verified",
+      "evidence": [
+        {
+          "source": "product/capabilities.json",
+          "locator": "CAP-007",
+          "note": "样例 HTTP 标签动作已实现。青禾发券和标签连接器写明 W8 再开发。"
+        },
+        {
+          "source": "01_沈总立项邮件.md",
+          "locator": "MAIL-W01-001 全文",
+          "note": "客户原话是识别和给建议，以及三个月看到效果。没有要求本期自动发券。"
+        }
+      ],
+      "next_step": "本期只演示样例标签的草案、确认、执行和撤销。若之后要求发券或效果数字，另立条目，不在 W01 承诺闭环。"
+    }
+  ]
+}
